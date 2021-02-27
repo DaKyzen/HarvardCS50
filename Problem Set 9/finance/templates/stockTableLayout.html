@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                {% block additionalHeaders %}{% endblock %}
+            </tr>
+        </thead>
+        <tfoot>
+            {% block footer %}{% endblock %}
+        </tfoot>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{stock["stockSymbol"]}}</td>
+                    <td>{{stock["name"]}}</td>
+                    <td>{{stock["totalBought"]}}</td>
+                    <td>{{stock["pricePerShare"]}}</td>
+                    <td>{{stock["total"]}}</td>
+            {% endfor %}
+                </tr>
+
+            <tr>
+                <td colspan="4">CASH</td>
+                <td>{{accountBalance}}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

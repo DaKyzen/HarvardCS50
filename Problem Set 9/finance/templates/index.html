@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+                <th>Buy/Sell</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>{{total}}</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{stock["stockSymbol"]}}</td>
+                    <td>{{stock["name"]}}</td>
+                    <td>{{stock["totalBought"]}}</td>
+                    <td>{{stock["pricePerShare"]}}</td>
+                    <td>{{stock["total"]}}</td>
+                    <td>
+                        <form action="/" method="post">
+                            <input type="hidden" name="symbol" value={{stock["stockSymbol"]}}>
+                            <input autocomplete="off" autofocus class="form-control" min="1" name="shares" placeholder="No. Shares" type="number">
+                            <button type="submit" class="buy btn btn-primary" name="buy" >Buy</button>
+                            <button type="submit" class="sell btn btn-primary" name="sell">Sell</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td colspan="4">CASH</td>
+                <td>{{accountBalance}}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
